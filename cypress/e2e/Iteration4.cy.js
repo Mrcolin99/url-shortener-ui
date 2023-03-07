@@ -22,5 +22,7 @@ describe('Iteration4', () => {
         cy.get('[name="urlToShorten"]')
             .type('world')
         cy.get('button').click()
+        cy.get(':nth-child(4) > h3').contains('Hello')
+        cy.get(':nth-child(4) > a').contains('http://localhost:3001/useshorturl/4')
     })
 })
