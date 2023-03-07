@@ -8,7 +8,8 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: []
+      urls: [],
+      error: false
     }
     this.addUrl = this.addUrl.bind(this)
   }
@@ -30,6 +31,10 @@ export class App extends Component {
     .then(data => {
       this.setState({ urls: [...this.state.urls, data] })
     })
+    .catch(error => {
+      console.log(error)
+      this.setState({ error: true })
+    })
   }
   
 
@@ -40,7 +45,9 @@ export class App extends Component {
           <h1>URL Shortener</h1>
           <UrlForm addUrl={this.addUrl}/>
         </header>
-
+        {this.state.error && (
+        <h3>THERE WAS AN ERROR ADDING THIS URL</h3>
+        )}
         <UrlContainer urls={this.state.urls} />
       </main>
     );
